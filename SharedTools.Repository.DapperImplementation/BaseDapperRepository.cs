@@ -25,6 +25,17 @@
             get { return _transaction ?? (_transaction = _sqlConnection.BeginTransaction()); }
         }
 
+        private IRepositoryTransaction _repositoryTransaction;
+        public IRepositoryTransaction RepositoryTransaction
+        {
+            get { return _repositoryTransaction ?? (_repositoryTransaction = new DapperTransaction(_transaction)); }
+        }
+
+        public IRepositoryTransaction BeginTransaction()
+        {
+            return RepositoryTransaction;
+        }
+
         private SqlConnection _sqlConnection;
 
         public SqlConnection GetConnection()
@@ -75,59 +86,71 @@
         public void Add(T entity)
         {
             var connection = GetConnection();
-            entity.Id = connection.Query<int>(WrapInsertToReturnId(), entity).FirstOrDefault();
+            entity.Id = connection.Query<int>(WrapInsertToReturnId(), entity, _transaction).FirstOrDefault();
         }
 
         public async Task AddAsync(T entity)
         {
             var connection = await GetConnectionAsync();
-            entity.Id = (await connection.QueryAsync<int>(WrapInsertToReturnId(), entity)).FirstOrDefault();
+            entity.Id = (await connection.QueryAsync<int>(WrapInsertToReturnId(), entity, _transaction)).FirstOrDefault();
         }
 
         public void Delete(T entity)
         {
             GetConnection().Execute(string.Format("UPDATE {0} SET [IsActive] = 0, [DeletedDate] = @now, [DeletedByUserId] = @userId WHERE Id = @id", TableName),
-                                          new { now = DateTime.Now, userId = entity.DeletedByUserId, id = entity.Id });
+                                          new { now = DateTime.Now, userId = entity.DeletedByUserId, id = entity.Id }, _transaction);
         }
 
         public async Task DeleteAsync(T entity)
         {
             var connection = await GetConnectionAsync();
             await connection.ExecuteAsync(string.Format("UPDATE {0} SET [IsActive] = 0, [DeletedDate] = @now, [DeletedByUserId] = @userId WHERE Id = @id", TableName),
-                                          new { now = DateTime.Now, userId = entity.DeletedByUserId, id = entity.Id });
+                                          new { now = DateTime.Now, userId = entity.DeletedByUserId, id = entity.Id }, _transaction);
         }
 
         public void Update(T entity)
         {
-            GetConnection().Execute(UpdateStatement, entity);
+            GetConnection().Execute(UpdateStatement, entity, _transaction);
         }
 
         public async Task UpdateAsync(T entity)
         {
             var connection = await GetConnectionAsync();
-            await connection.ExecuteAsync(UpdateStatement, entity);
+            await connection.ExecuteAsync(UpdateStatement, entity, _transaction);
         }
 
         public T FindById(int id)
         {
-            return GetConnection().Query<T>(SelectQuery, new { id }).FirstOrDefault();
+            return GetConnection().Query<T>(SelectQuery, new { id }, _transaction).FirstOrDefault();
         }
 
         public async Task<T> FindByIdAsync(int id)
         {
             var connection = await GetConnectionAsync();
-            return (await connection.QueryAsync<T>(SelectQuery, new { id })).FirstOrDefault();
+            return (await connection.QueryAsync<T>(SelectQuery, new { id }, _transaction)).FirstOrDefault();
         }
 
         public IEnumerable<T> FindAll()
         {
-            return GetConnection().Query<T>("SELECT * FROM " + TableName);
+            return GetConnection().Query<T>("SELECT * FROM " + TableName, _transaction);
         }
 
         public async Task<IEnumerable<T>> FindAllAsync()
         {
             var connection = await GetConnectionAsync();
-            return await connection.QueryAsync<T>("SELECT * FROM " + TableName);
+            return await connection.QueryAsync<T>("SELECT * FROM " + TableName, _transaction);
+        }
+
+        public string EncodeStringForLike(string term)
+        {
+            if (string.IsNullOrEmpty(term))
+            {
+                return term;
+            }
+
+            var encodeForLike =  term.Replace("%", "[%]").Replace("[", "[[]").Replace("]", "[]]");
+
+            return "%" + encodeForLike + "%";
         }
 
         public void Dispose()

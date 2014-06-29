@@ -7,6 +7,7 @@
 
     public interface IRepository<T> : IDisposable where T : BaseEntity
     {
+        IRepositoryTransaction BeginTransaction();
         void Add(T entity);
         Task AddAsync(T entity);
         Task DeleteAsync(T entity);

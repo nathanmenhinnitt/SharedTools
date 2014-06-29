@@ -17,12 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DapperRepositoryTests", "Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedTools.Repository.DapperImplementationTests", "SharedTools.Repository.DapperImplementationTests\SharedTools.Repository.DapperImplementationTests.csproj", "{C0BBBFA5-3978-4F2A-B20F-349161340BB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedTools.Repository.EntityFrameworkImplementation", "SharedTools.Repository.EntityFrameworkImplementation\SharedTools.Repository.EntityFrameworkImplementation.csproj", "{2370CD9F-88AD-42B4-BC8E-3EE94D74D3B9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntityFrameworkRepositoryTests", "EntityFrameworkRepositoryTests", "{240A9966-6C0A-4DF3-AAAF-9A9E366A5D2B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedTools.Repository.EntityFrameworkimplementationTests", "SharedTools.Repository.EntityFrameworkimplementationTests\SharedTools.Repository.EntityFrameworkimplementationTests.csproj", "{C2151EA3-1F87-4A19-B0F1-2BBEAEF51708}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,27 +39,16 @@ Global
 		{C0BBBFA5-3978-4F2A-B20F-349161340BB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0BBBFA5-3978-4F2A-B20F-349161340BB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0BBBFA5-3978-4F2A-B20F-349161340BB8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2370CD9F-88AD-42B4-BC8E-3EE94D74D3B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2370CD9F-88AD-42B4-BC8E-3EE94D74D3B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2370CD9F-88AD-42B4-BC8E-3EE94D74D3B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2370CD9F-88AD-42B4-BC8E-3EE94D74D3B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2151EA3-1F87-4A19-B0F1-2BBEAEF51708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2151EA3-1F87-4A19-B0F1-2BBEAEF51708}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2151EA3-1F87-4A19-B0F1-2BBEAEF51708}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2151EA3-1F87-4A19-B0F1-2BBEAEF51708}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{634E8AB5-EAB2-46BF-AE83-948EFF1027AC} = {0E1EF635-0A92-44A6-AC39-B2CF6BF39BE4}
-		{240A9966-6C0A-4DF3-AAAF-9A9E366A5D2B} = {0E1EF635-0A92-44A6-AC39-B2CF6BF39BE4}
+		{0E1EF635-0A92-44A6-AC39-B2CF6BF39BE4} = {D3E78CCF-AA55-45A6-8029-BABFE29F6D66}
 		{D410CAF1-01B5-40C6-A080-5F78761E0DC3} = {D3E78CCF-AA55-45A6-8029-BABFE29F6D66}
 		{6F1294AC-17DA-4A4F-AB77-DC643F5062AF} = {D3E78CCF-AA55-45A6-8029-BABFE29F6D66}
-		{2370CD9F-88AD-42B4-BC8E-3EE94D74D3B9} = {D3E78CCF-AA55-45A6-8029-BABFE29F6D66}
-		{0E1EF635-0A92-44A6-AC39-B2CF6BF39BE4} = {D3E78CCF-AA55-45A6-8029-BABFE29F6D66}
+		{634E8AB5-EAB2-46BF-AE83-948EFF1027AC} = {0E1EF635-0A92-44A6-AC39-B2CF6BF39BE4}
 		{F71DEA9A-83EC-44F5-ABD7-D53F8AE32B20} = {8D31256A-DFFB-42DD-A5F1-A88270CCEDD0}
 		{C0BBBFA5-3978-4F2A-B20F-349161340BB8} = {634E8AB5-EAB2-46BF-AE83-948EFF1027AC}
-		{C2151EA3-1F87-4A19-B0F1-2BBEAEF51708} = {240A9966-6C0A-4DF3-AAAF-9A9E366A5D2B}
 	EndGlobalSection
 EndGlobal
